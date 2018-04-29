@@ -1,0 +1,135 @@
+package graph;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class MazeControls extends JPanel {
+	
+	private static final int MIN_NUM_ROWS = 3;
+	private static final int MIN_NUM_COLS = 3;
+	private static final int MAX_NUM_ROWS = 100;
+	private static final int MAX_NUM_COLS = 100;
+	private static final int INIT_NUM_ROWS = 5;
+	private static final int INIT_NUM_COLS = 10;
+	private static final int STEP = 1;
+	// Speed defines the number of movements per second
+	private static final int MIN_SPEED = 1;
+	private static final int MAX_SPEED = 21;
+	private static final long ONE_SECOND = 1000;
+	private MazeBoard mazeBoard;
+	private JSlider speedSlider;
+	private JSpinner numColsSpinner,
+					 numRowsSpinner;
+
+	public MazeControls(MazeBoard board) {
+		super();
+		Box box = Box.createVerticalBox();
+		this.setPreferredSize(new Dimension(100, 600));
+		this.setMaximumSize(new Dimension(170, Short.MAX_VALUE));
+		this.mazeBoard = board;
+		// NUM ROWS SPINNER
+		JLabel numRowsTitle = new JLabel("Number of rows");
+		numRowsTitle.setAlignmentX(CENTER_ALIGNMENT);
+		box.add(numRowsTitle);
+		SpinnerNumberModel rowsSpinnerModel = new SpinnerNumberModel(INIT_NUM_ROWS, MIN_NUM_ROWS, MAX_NUM_ROWS, STEP);
+		this.numRowsSpinner = new JSpinner(rowsSpinnerModel);
+		this.numRowsSpinner.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				// TODO This will not update the state until reset button. Desired behavior? 
+				int numRows = (int) MazeControls.this.numRowsSpinner.getValue();
+				MazeControls.this.mazeBoard.setNumRows(numRows);
+			}
+			
+		});
+		box.add(this.numRowsSpinner);
+		
+		// NUM COLS SPINNER
+		JLabel colsSpinnerTitle = new JLabel("Number of columns");
+		colsSpinnerTitle.setAlignmentX(CENTER_ALIGNMENT);
+		box.add(colsSpinnerTitle);
+		SpinnerNumberModel colsSpinnerModel = new SpinnerNumberModel(INIT_NUM_COLS, MIN_NUM_COLS, MAX_NUM_COLS, STEP);
+		this.numColsSpinner = new JSpinner(colsSpinnerModel);
+		this.numColsSpinner.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				// TODO This will not update the state until reset button. Desired behavior? 
+				int numCols = (int) MazeControls.this.numColsSpinner.getValue();
+				MazeControls.this.mazeBoard.setNumCols(numCols);
+			}
+			
+		});
+		box.add(this.numColsSpinner);
+		
+		// SPEED SLIDER
+		JLabel speedSliderTitle = new JLabel("Speed");
+		speedSliderTitle.setAlignmentX(CENTER_ALIGNMENT);
+		box.add(speedSliderTitle);
+		this.speedSlider = new JSlider(JSlider.VERTICAL, MazeControls.MIN_SPEED, MazeControls.MAX_SPEED,
+				MazeControls.MIN_SPEED);
+		this.speedSlider.setPaintTicks(true);
+		this.speedSlider.setMajorTickSpacing(5);
+		this.speedSlider.setMinorTickSpacing(1);
+		this.speedSlider.setPaintLabels(true);
+		this.speedSlider.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				// TODO This will immediately update the speed. Desired behavior?
+				int speed = MazeControls.this.speedSlider.getValue();
+				MazeControls.this.mazeBoard.setStepDelay(MazeControls.ONE_SECOND / speed);
+			}
+			
+		});
+		box.add(this.speedSlider);
+		this.add(box);
+		
+		// BEGIN BUTTON
+		JButton generateBTN = new JButton("Generate");
+		generateBTN.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MazeControls.this.mazeBoard.setup();
+				MazeControls.this.mazeBoard.solve();
+			}
+			
+		});
+		generateBTN.setAlignmentX(CENTER_ALIGNMENT);
+		box.add(generateBTN);
+		
+		// RESET BUTTON
+		/*
+		JButton reset_btn = new JButton("Reset");
+		reset_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int num_disks = HanoiControls.this.num_disks_slider.getValue();
+				HanoiControls.this.tower_container.setNumDisks(num_disks);
+				HanoiControls.this.tower_container.setInitialState();
+			}
+			
+		});
+		reset_btn.setAlignmentX(CENTER_ALIGNMENT);
+		box.add(reset_btn);
+		*/
+		
+		// DISPLAY NUMBER OF MOVEMENTS
+		// TODO Missing
+	}
+}
