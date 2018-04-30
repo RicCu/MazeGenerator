@@ -1,4 +1,4 @@
-package graph;
+package maze;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -7,15 +7,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import maze.generate.EllerAlgorithm;
+import maze.generate.RecursiveBackTracker;
+
 public class MazeControls extends JPanel {
+	
+	private static final String[] AVAILABLE_ALGORITHMS = {RecursiveBackTracker.NAME, EllerAlgorithm.NAME};
 	
 	private static final int MIN_NUM_ROWS = 3;
 	private static final int MIN_NUM_COLS = 3;
@@ -26,7 +33,7 @@ public class MazeControls extends JPanel {
 	private static final int STEP = 1;
 	// Speed defines the number of movements per second
 	private static final int MIN_SPEED = 1;
-	private static final int MAX_SPEED = 21;
+	private static final int MAX_SPEED = 51;
 	private static final long ONE_SECOND = 1000;
 	private MazeBoard mazeBoard;
 	private JSlider speedSlider;
@@ -36,9 +43,33 @@ public class MazeControls extends JPanel {
 	public MazeControls(MazeBoard board) {
 		super();
 		Box box = Box.createVerticalBox();
-		this.setPreferredSize(new Dimension(100, 600));
+		this.setPreferredSize(new Dimension(170, 600));
 		this.setMaximumSize(new Dimension(170, Short.MAX_VALUE));
 		this.mazeBoard = board;
+		this.mazeBoard.setStepDelay(MIN_SPEED);
+		
+		// ALGORITHM SELECTOR
+		JLabel algorithmsTitle = new JLabel("Generator algorithm");
+		algorithmsTitle.setAlignmentX(CENTER_ALIGNMENT);
+		box.add(algorithmsTitle);
+		JComboBox algorithmSelector = new JComboBox(AVAILABLE_ALGORITHMS);
+		algorithmSelector.setSelectedItem(RecursiveBackTracker.NAME);
+		algorithmSelector.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String selectedAlgorithm = (String) algorithmSelector.getSelectedItem();
+				MazeControls.this.mazeBoard.setAlgorithm(selectedAlgorithm);
+			}
+			
+		});
+		algorithmSelector.getActionListeners()[0].actionPerformed(null);;
+		box.add(algorithmSelector);
+		//JRadioButton recursiveBactrackerBTN = new JRadioButton();
+		//JRadioButton ellerBTN = new JRadioButton();
+		
+				
 		// NUM ROWS SPINNER
 		JLabel numRowsTitle = new JLabel("Number of rows");
 		numRowsTitle.setAlignmentX(CENTER_ALIGNMENT);
@@ -53,8 +84,8 @@ public class MazeControls extends JPanel {
 				int numRows = (int) MazeControls.this.numRowsSpinner.getValue();
 				MazeControls.this.mazeBoard.setNumRows(numRows);
 			}
-			
 		});
+		this.numRowsSpinner.getChangeListeners()[0].stateChanged(null);
 		box.add(this.numRowsSpinner);
 		
 		// NUM COLS SPINNER
@@ -73,6 +104,7 @@ public class MazeControls extends JPanel {
 			}
 			
 		});
+		this.numColsSpinner.getChangeListeners()[0].stateChanged(null);
 		box.add(this.numColsSpinner);
 		
 		// SPEED SLIDER
@@ -95,6 +127,7 @@ public class MazeControls extends JPanel {
 			}
 			
 		});
+		this.speedSlider.getChangeListeners()[0].stateChanged(null);
 		box.add(this.speedSlider);
 		this.add(box);
 		

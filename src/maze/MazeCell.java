@@ -1,4 +1,4 @@
-package graph;
+package maze;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -58,6 +58,22 @@ public class MazeCell extends JPanel{
 	public void noFill() {
 		this.blue = false;
 		this.red = false;
+	}
+	
+	public boolean hasWallUp() {
+		return this.hasWallUp;
+	}
+	
+	public boolean hasWallDown() {
+		return this.hasWallDown;
+	}
+	
+	public boolean hasWallLeft() {
+		return this.hasWallLeft;
+	}
+	
+	public boolean hasWallRight() {
+		return this.hasWallRight;
 	}
 	
 	public void addWallUp() {

@@ -1,9 +1,12 @@
-package graph;
+package maze;
 
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
+
+import maze.generate.Generator;
+import maze.generate.RecursiveBackTracker;
 
 public class MazeDisplay extends JFrame {
 	

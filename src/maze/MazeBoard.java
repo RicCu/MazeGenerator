@@ -1,4 +1,4 @@
-package graph;
+package maze;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -6,9 +6,14 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
+import maze.generate.EllerAlgorithm;
+import maze.generate.Generator;
+import maze.generate.RecursiveBackTracker;
+import maze.generate.UninitializedGeneratorException;
+
 public class MazeBoard extends JPanel {
 	
-	private MazeGraph maze;
+	private Maze maze;
 	
 	private Generator generator;
 	
@@ -20,6 +25,8 @@ public class MazeBoard extends JPanel {
 				numCols;
 	
 	private long stepDelay;
+	
+	private String selectedAlgorithm;
 	
 	public MazeBoard(Generator generator) {
 		super();
@@ -42,10 +49,7 @@ public class MazeBoard extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		this.updateDimensions();
-		LinkedList<MazeCell> vertices = this.maze.getVertices();
-		for (MazeCell vertex : vertices) {
-			vertex.paintComponent(g, this.cellH, this.cellW);
-		}
+		this.maze.paint(g, this.cellH, this.cellW);
 	}
 	
 	public void setStepDelay(long step_delay) {
@@ -67,10 +71,9 @@ public class MazeBoard extends JPanel {
 						MazeBoard.this.repaint();
 						Thread.sleep(MazeBoard.this.stepDelay);
 					}
-					System.out.println("Finished");
 				} catch(InterruptedException ex) {
 					System.out.println("Interupted");
-				} catch (UninitializedException ex) {
+				} catch (UninitializedGeneratorException ex) {
 					System.out.println("Attempted to generate without initializing");
 				}
 			}
@@ -80,7 +83,16 @@ public class MazeBoard extends JPanel {
 	}
 	
 	public void setup() {
-		this.generator = new RecursiveBackTracker(this.numRows, this.numCols);
+		//this.generator = new RecursiveBackTracker(this.numRows, this.numCols);
+		this.generator = new EllerAlgorithm(this.numRows, this.numCols);
+		switch (this.selectedAlgorithm) {
+			case (RecursiveBackTracker.NAME):
+				this.generator = new RecursiveBackTracker(this.numRows, this.numCols);
+				break;
+			case (EllerAlgorithm.NAME):
+				this.generator = new EllerAlgorithm(this.numRows, this.numCols);
+				break;
+	}
 		this.maze = this.generator.getMaze();
 	}
 
@@ -90,5 +102,10 @@ public class MazeBoard extends JPanel {
 	
 	public void setNumCols(int numCols) {
 		this.numCols = numCols;
+	}
+
+	public void setAlgorithm(String selectedAlgorithm) {
+		this.selectedAlgorithm = selectedAlgorithm;
+		
 	}
 }
