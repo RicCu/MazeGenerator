@@ -1,3 +1,7 @@
+// A01203967 José Ricardo Cuenca Enríquez
+// Maze
+// 02/05/18
+
 package maze;
 
 import java.awt.Graphics;

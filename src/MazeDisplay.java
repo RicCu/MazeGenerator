@@ -1,4 +1,6 @@
-
+// A01203967 José Ricardo Cuenca Enríquez
+// MazeDisplay
+// 02/05/18
 
 import java.awt.BorderLayout;
 
