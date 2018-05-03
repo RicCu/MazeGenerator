@@ -14,6 +14,22 @@ public class Coordinate {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Coordinate getNeighborUp() {
+		return new Coordinate(this.x, this.y-1);
+	}
+	
+	public Coordinate getNeighborDown() {
+		return new Coordinate(this.x, this.y+1);
+	}
+	
+	public Coordinate getNeighborLeft() {
+		return new Coordinate(this.x-1, this.y);
+	}
+	
+	public Coordinate getNeighborRight() {
+		return new Coordinate(this.x+1, this.y);
+	}
 
 	public int getX() {
 		return x;

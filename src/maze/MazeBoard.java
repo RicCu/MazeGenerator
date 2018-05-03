@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
+import maze.generate.BinaryTreeAlgorithm;
 import maze.generate.EllerAlgorithm;
 import maze.generate.Generator;
 import maze.generate.RecursiveBackTracker;
@@ -95,6 +96,9 @@ public class MazeBoard extends JPanel {
 				break;
 			case (EllerAlgorithm.NAME):
 				this.generator = new EllerAlgorithm(this.numRows, this.numCols);
+				break;
+			case (BinaryTreeAlgorithm.NAME):
+				this.generator = new BinaryTreeAlgorithm(this.numRows, this.numCols);
 				break;
 	}
 		this.maze = this.generator.getMaze();

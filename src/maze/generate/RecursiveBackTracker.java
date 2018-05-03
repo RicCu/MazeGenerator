@@ -26,8 +26,8 @@ public class RecursiveBackTracker extends Generator {
 	private Stack<MazeCell> fringe;
 	private Set<MazeCell> unvisitedSet;
 	
-	public RecursiveBackTracker(int height, int width) {
-		this.maze = new MazeGraph(height, width, true);
+	public RecursiveBackTracker(int numRows, int numCols) {
+		this.maze = new MazeGraph(numRows, numCols, true);
 		this.fringe = new Stack<MazeCell>();
 		this.unvisitedSet = new HashSet<>();
 		this.started = false;
@@ -35,6 +35,8 @@ public class RecursiveBackTracker extends Generator {
 		for (MazeCell vertex : vertices) {
 			this.unvisitedSet.add(vertex);
 		}
+		this.numRows = numRows;
+		this.numCols = numCols;
 	}
 	
 	
@@ -49,14 +51,17 @@ public class RecursiveBackTracker extends Generator {
 			this.fringe.add(current);
 			old = current;
 			current = this.getUnvisitedNeighbor(current);
-			current.fillBlue();
+			current.paintBlue();
 			this.removeWalls(old, current);
 			this.visit(current);
 		}
 		else if (!this.fringe.empty()){
-			current.noFill();
+			current.removePaint();
 			current = this.fringe.pop();
 			
+		}
+		if (this.finished()) {
+			this.openBeginEnd();
 		}
 	}
 	
@@ -98,5 +103,13 @@ public class RecursiveBackTracker extends Generator {
 		} while(neighbor.hasBeenVisited());
 		return neighbor;
 	}
+	
+	protected void openBeginEnd() {
+		this.maze.getCell(0).removeWallLeft();
+		this.maze.getCell(0).paintGreen();
+		this.maze.getCell((numRows*numCols)-1).removeWallRight();	
+		this.maze.getCell((numRows*numCols)-1).paintRed();	
+	}
+
 
 }

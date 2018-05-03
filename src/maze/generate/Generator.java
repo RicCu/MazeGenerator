@@ -17,6 +17,8 @@ public abstract class Generator {
 	
 	public static String NAME;
 	
+	protected int numRows,
+				  numCols;
 
 	public abstract boolean finished();
 	
@@ -30,6 +32,8 @@ public abstract class Generator {
 						"before initializing. Call start() before.");
 		}
 	}
+	
+	protected abstract void openBeginEnd();
 	
 	public abstract Maze getMaze();
 	

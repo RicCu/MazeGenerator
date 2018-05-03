@@ -21,28 +21,22 @@ public class EllerAlgorithm extends Generator {
 	private final int MIN_NUM_SETS_BUFFER = 1;
 	private final int OPEN_CONNECTION_PROBABILITY = 35;
 	
-	private Set<EllerCell>[] cellSets;
-	
 	private EllerMaze maze;
 	
 	private int currentRowIdx;
 	
 	// Only select cells for joining within this range to avoid checking boundaries
-	private final int minX,
-					  maxX,
-					  numRows;
+	private final int maxX;
 	
 	private EllerCell[] currentRow,
 					   previousRow;
 	
-	@SuppressWarnings("unchecked")
 	public EllerAlgorithm(int numRows, int numCols) {
 		this.maze = new EllerMaze(numRows, numCols);
 		this.currentRowIdx = 0;
-		this.minX = 1;
 		this.maxX = numCols-1; 
 		this.numRows = numRows;
-		//this.cellSets = (Set<EllerCell>[]) new Object[numCols];
+		this.numCols = numCols;
 	}
 
 	@Override
@@ -135,14 +129,12 @@ public class EllerAlgorithm extends Generator {
 		this.currentRow = this.maze.getRow(this.currentRowIdx);
 		//	Initialize sets for the row
 		for (int i=0; i<this.currentRow.length; i++) {
-			this.currentRow[i].fillBlue();
-			this.previousRow[i].noFill();
+			this.currentRow[i].paintBlue();
+			this.previousRow[i].removePaint();
 			if (this.previousRow[i].hasWallDown()) {
-				System.out.println("New set for "+ i);
 				this.currentRow[i].setSet(new HashSet<>());
 			}
 			else {
-				System.out.println("Old set for "+ i);
 				this.currentRow[i].removeWallUp();
 				this.currentRow[i].setSet(this.previousRow[i].getSet());
 			}
@@ -154,19 +146,29 @@ public class EllerAlgorithm extends Generator {
 			this.previousRow = this.currentRow;
 		}
 		else {
-			System.out.println("FINISHING");
-			System.out.println("SETS: "+this.getNumSetsIn(this.currentRow));
 			for(int i=0; i<this.currentRow.length-1; i++) {
+				this.currentRow[i].removePaint();
 				if (this.canJoinPair(new int[] {i, i+1})) {
 					this.joinPair(new int[] {i, i+1});
 				}
 			}
+			this.currentRow[this.currentRow.length-1].removePaint();
+			this.openBeginEnd();
 		}
 	}
 	
 	public Maze getMaze() {
 		return this.maze;
 	}
+
+	@Override
+	protected void openBeginEnd() {
+		this.maze.getCell(0).removeWallLeft();
+		this.maze.getCell(0).paintGreen();
+		this.maze.getCell((numRows*numCols)-1).removeWallRight();	
+		this.maze.getCell((numRows*numCols)-1).paintRed();
+	}
+
 
 }
 
@@ -235,5 +237,7 @@ class EllerMaze extends Maze{
 	public LinkedList<MazeCell> getAllCells() {
 		return new LinkedList<>(Arrays.asList(this.cells));
 	}
+	
+	
 	
 }

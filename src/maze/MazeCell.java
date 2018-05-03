@@ -19,7 +19,8 @@ public class MazeCell extends JPanel{
 					hasWallRight,
 					visited,
 					blue,
-					red;
+					red,
+					green;
 	
 	public void paintComponent(Graphics g, int height, int width) {
 		super.paintComponent(g);
@@ -31,7 +32,11 @@ public class MazeCell extends JPanel{
 			g.fillRect(x, y, width, height);
 		}
 		else if (this.red) {
-			g.setColor(new Color(0x4FBA77));
+			g.setColor(new Color(215, 20, 20, 227));
+			g.fillRect(x, y, width, height);
+		}
+		else if (this.green) {
+			g.setColor(new Color(20, 215, 26, 176));
 			g.fillRect(x, y, width, height);
 		}
 		g.setColor(oldColor);
@@ -49,19 +54,28 @@ public class MazeCell extends JPanel{
 		}
 	}
 	
-	public void fillBlue() {
+	public void paintBlue() {
 		this.blue = true;
 		this.red = false;
+		this.green = false;
 	}
 	
-	public void fillRed() {
+	public void paintRed() {
 		this.blue = false;
 		this.red = true;
+		this.green = false;
 	}
 	
-	public void noFill() {
+	public void paintGreen() {
 		this.blue = false;
 		this.red = false;
+		this.green = true;
+	}
+	
+	public void removePaint() {
+		this.blue = false;
+		this.red = false;
+		this.green = false;
 	}
 	
 	public boolean hasWallUp() {
@@ -116,7 +130,7 @@ public class MazeCell extends JPanel{
 		super();
 		this.coord = new Coordinate(row, col);
 		this.visited = false;
-		this.noFill();
+		this.removePaint();
 		if (withWalls) {
 			this.hasWallUp = true;
 			this.hasWallDown = true;

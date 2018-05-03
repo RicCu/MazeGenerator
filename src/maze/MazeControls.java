@@ -21,12 +21,13 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import maze.generate.BinaryTreeAlgorithm;
 import maze.generate.EllerAlgorithm;
 import maze.generate.RecursiveBackTracker;
 
 public class MazeControls extends JPanel {
 	
-	private static final String[] AVAILABLE_ALGORITHMS = {RecursiveBackTracker.NAME, EllerAlgorithm.NAME};
+	private static final String[] AVAILABLE_ALGORITHMS = {RecursiveBackTracker.NAME, EllerAlgorithm.NAME, BinaryTreeAlgorithm.NAME};
 	
 	private static final int MIN_NUM_ROWS = 3;
 	private static final int MIN_NUM_COLS = 3;
@@ -35,9 +36,10 @@ public class MazeControls extends JPanel {
 	private static final int INIT_NUM_ROWS = 5;
 	private static final int INIT_NUM_COLS = 10;
 	private static final int STEP = 1;
+	private static final int SPACE_BETWEEN_COMPONENTS = 20;
 	// Speed defines the number of movements per second
 	private static final int MIN_SPEED = 1;
-	private static final int MAX_SPEED = 51;
+	private static final int MAX_SPEED = 31;
 	private static final long ONE_SECOND = 1000;
 	private MazeBoard mazeBoard;
 	private JSlider speedSlider;
@@ -51,6 +53,7 @@ public class MazeControls extends JPanel {
 		this.setMaximumSize(new Dimension(170, Short.MAX_VALUE));
 		this.mazeBoard = board;
 		this.mazeBoard.setStepDelay(MIN_SPEED);
+		box.add(Box.createRigidArea(new Dimension(0,2*SPACE_BETWEEN_COMPONENTS)));
 		
 		// ALGORITHM SELECTOR
 		JLabel algorithmsTitle = new JLabel("Generator algorithm");
@@ -70,9 +73,7 @@ public class MazeControls extends JPanel {
 		});
 		algorithmSelector.getActionListeners()[0].actionPerformed(null);;
 		box.add(algorithmSelector);
-		//JRadioButton recursiveBactrackerBTN = new JRadioButton();
-		//JRadioButton ellerBTN = new JRadioButton();
-		
+		box.add(Box.createRigidArea(new Dimension(0,SPACE_BETWEEN_COMPONENTS)));
 				
 		// NUM ROWS SPINNER
 		JLabel numRowsTitle = new JLabel("Number of rows");
@@ -91,6 +92,7 @@ public class MazeControls extends JPanel {
 		});
 		this.numRowsSpinner.getChangeListeners()[0].stateChanged(null);
 		box.add(this.numRowsSpinner);
+		box.add(Box.createRigidArea(new Dimension(0, SPACE_BETWEEN_COMPONENTS)));
 		
 		// NUM COLS SPINNER
 		JLabel colsSpinnerTitle = new JLabel("Number of columns");
@@ -110,6 +112,7 @@ public class MazeControls extends JPanel {
 		});
 		this.numColsSpinner.getChangeListeners()[0].stateChanged(null);
 		box.add(this.numColsSpinner);
+		box.add(Box.createRigidArea(new Dimension(0, SPACE_BETWEEN_COMPONENTS)));
 		
 		// SPEED SLIDER
 		JLabel speedSliderTitle = new JLabel("Speed");
@@ -134,6 +137,7 @@ public class MazeControls extends JPanel {
 		this.speedSlider.getChangeListeners()[0].stateChanged(null);
 		box.add(this.speedSlider);
 		this.add(box);
+		box.add(Box.createRigidArea(new Dimension(0, SPACE_BETWEEN_COMPONENTS)));
 		
 		// BEGIN BUTTON
 		JButton generateBTN = new JButton("Generate");
@@ -148,25 +152,5 @@ public class MazeControls extends JPanel {
 		});
 		generateBTN.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(generateBTN);
-		
-		// RESET BUTTON
-		/*
-		JButton reset_btn = new JButton("Reset");
-		reset_btn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				int num_disks = HanoiControls.this.num_disks_slider.getValue();
-				HanoiControls.this.tower_container.setNumDisks(num_disks);
-				HanoiControls.this.tower_container.setInitialState();
-			}
-			
-		});
-		reset_btn.setAlignmentX(CENTER_ALIGNMENT);
-		box.add(reset_btn);
-		*/
-		
-		// DISPLAY NUMBER OF MOVEMENTS
-		// TODO Missing
 	}
 }

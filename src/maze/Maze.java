@@ -28,7 +28,7 @@ public abstract class Maze {
 		return this.numCols;
 	}
 	
-	protected boolean canContain(Coordinate coord) {
+	public boolean canContain(Coordinate coord) {
 		boolean isAboveMin = coord.getX() >= 0 && coord.getY() >= 0;
 		boolean isBelowMax = coord.getX() < this.numCols && coord.getY() < this.numRows;
 		return isAboveMin && isBelowMax;
