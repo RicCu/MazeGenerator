@@ -1,15 +1,12 @@
-// A01203967 José Ricardo Cuenca Enríquez
+// A01203967 Josï¿½ Ricardo Cuenca Enrï¿½quez
 // MazeGraph
 // 02/05/18
 
 package maze;
 
-import java.awt.Graphics;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Set;
 import java.util.Stack;
-import java.util.TreeSet;
+
 
 public class MazeGraph extends Maze {
 

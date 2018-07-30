@@ -8,7 +8,6 @@ import java.awt.BorderLayout;
 import javax.swing.Box;
 import javax.swing.JFrame;
 
-import maze.*;
 import maze.generate.Generator;
 import maze.generate.RecursiveBackTracker;
 

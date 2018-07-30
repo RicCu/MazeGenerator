@@ -6,7 +6,6 @@ package maze;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.LinkedList;
 
 import javax.swing.JPanel;
 

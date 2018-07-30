@@ -1,4 +1,4 @@
-// A01203967 José Ricardo Cuenca Enríquez
+// A01203967 Josï¿½ Ricardo Cuenca Enrï¿½quez
 // RecursiveBackTracker
 // 02/05/18
 
@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.HashSet;
-import java.util.concurrent.ThreadLocalRandom;
 
 import maze.Maze;
 import maze.MazeCell;
