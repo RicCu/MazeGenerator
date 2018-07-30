@@ -70,7 +70,6 @@ public class MazeControls extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				String selectedAlgorithm = (String) algorithmSelector.getSelectedItem();
 				MazeControls.this.mazeBoard.setAlgorithm(selectedAlgorithm);
 			}
