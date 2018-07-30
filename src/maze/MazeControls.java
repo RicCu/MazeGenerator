@@ -36,15 +36,19 @@ public class MazeControls extends JPanel {
 	private static final int MIN_NUM_COLS = 3;
 	private static final int MAX_NUM_ROWS = 100;
 	private static final int MAX_NUM_COLS = 100;
-	private static final int INIT_NUM_ROWS = 5;
-	private static final int INIT_NUM_COLS = 10;
 	private static final int STEP = 1;
 	private static final int SPACE_BETWEEN_COMPONENTS = 20;
+	private static final int SPACE_AFTER_TITLE = 5;
+	
+	public static final int INIT_NUM_ROWS = 5;
+	public static final int INIT_NUM_COLS = 10;
+	
 	// Speed defines the number of movements per second
 	private static final int MIN_SPEED = 1;
 	private static final int MAX_SPEED = 31;
 	private static final long ONE_SECOND = 1000;
 	private static final Dimension SPINNER_DIMENSION = new Dimension(50, 24);
+	private static final Dimension MAZE_CONTROLS_DIMENSION = new Dimension(190, 550);
 	
 	private MazeBoard mazeBoard;
 	private JSlider speedSlider;
@@ -54,8 +58,8 @@ public class MazeControls extends JPanel {
 	public MazeControls(MazeBoard board) {
 		super();
 		Box box = Box.createVerticalBox();
-		this.setPreferredSize(new Dimension(170, 600));
-		this.setMaximumSize(new Dimension(170, Short.MAX_VALUE));
+		this.setPreferredSize(MAZE_CONTROLS_DIMENSION);
+		this.setMaximumSize(MAZE_CONTROLS_DIMENSION);
 		this.mazeBoard = board;
 		this.mazeBoard.setStepDelay(MIN_SPEED);
 		box.add(Box.createRigidArea(new Dimension(0,2*SPACE_BETWEEN_COMPONENTS)));
@@ -64,6 +68,7 @@ public class MazeControls extends JPanel {
 		JLabel algorithmsTitle = new JLabel("Generator algorithm");
 		algorithmsTitle.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(algorithmsTitle);
+		box.add(Box.createRigidArea(new Dimension(0,SPACE_AFTER_TITLE)));
 		JComboBox<String> algorithmSelector = new JComboBox<String>(AVAILABLE_ALGORITHMS);
 		algorithmSelector.setSelectedItem(RecursiveBackTracker.NAME);
 		algorithmSelector.addActionListener(new ActionListener() {
@@ -78,11 +83,12 @@ public class MazeControls extends JPanel {
 		algorithmSelector.getActionListeners()[0].actionPerformed(null);;
 		box.add(algorithmSelector);
 		box.add(Box.createRigidArea(new Dimension(0,SPACE_BETWEEN_COMPONENTS)));
-				
+		
 		// NUM ROWS SPINNER
 		JLabel numRowsTitle = new JLabel("Number of rows");
 		numRowsTitle.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(numRowsTitle);
+		box.add(Box.createRigidArea(new Dimension(0,SPACE_AFTER_TITLE)));
 		SpinnerNumberModel rowsSpinnerModel = new SpinnerNumberModel(INIT_NUM_ROWS, MIN_NUM_ROWS, MAX_NUM_ROWS, STEP);
 		this.numRowsSpinner = new JSpinner(rowsSpinnerModel);
 		this.numRowsSpinner.setPreferredSize(SPINNER_DIMENSION);
@@ -104,6 +110,7 @@ public class MazeControls extends JPanel {
 		JLabel colsSpinnerTitle = new JLabel("Number of columns");
 		colsSpinnerTitle.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(colsSpinnerTitle);
+		box.add(Box.createRigidArea(new Dimension(0,SPACE_AFTER_TITLE)));
 		SpinnerNumberModel colsSpinnerModel = new SpinnerNumberModel(INIT_NUM_COLS, MIN_NUM_COLS, MAX_NUM_COLS, STEP);
 		this.numColsSpinner = new JSpinner(colsSpinnerModel);
 		this.numColsSpinner.setPreferredSize(SPINNER_DIMENSION);
@@ -126,6 +133,7 @@ public class MazeControls extends JPanel {
 		JLabel speedSliderTitle = new JLabel("Speed");
 		speedSliderTitle.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(speedSliderTitle);
+		box.add(Box.createRigidArea(new Dimension(0,SPACE_AFTER_TITLE)));
 		this.speedSlider = new JSlider(JSlider.VERTICAL, MazeControls.MIN_SPEED, MazeControls.MAX_SPEED,
 				MazeControls.MIN_SPEED);
 		this.speedSlider.setPaintTicks(true);
@@ -144,7 +152,6 @@ public class MazeControls extends JPanel {
 		});
 		this.speedSlider.getChangeListeners()[0].stateChanged(null);
 		box.add(this.speedSlider);
-		this.add(box);
 		box.add(Box.createRigidArea(new Dimension(0, SPACE_BETWEEN_COMPONENTS)));
 		
 		// BEGIN BUTTON
@@ -160,5 +167,6 @@ public class MazeControls extends JPanel {
 		});
 		generateBTN.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(generateBTN);
+		this.add(box);
 	}
 }

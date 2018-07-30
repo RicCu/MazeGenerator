@@ -24,7 +24,7 @@ public class MazeDisplay extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle(TITLE);
 		Box box = Box.createHorizontalBox();
-		Generator generator = new RecursiveBackTracker(10, 5);
+		Generator generator = new RecursiveBackTracker(MazeControls.INIT_NUM_ROWS, MazeControls.INIT_NUM_COLS);
 		MazeBoard board = new MazeBoard(generator);
 		MazeControls controls = new MazeControls(board);
 		box.add(controls);
