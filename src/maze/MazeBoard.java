@@ -70,7 +70,6 @@ public class MazeBoard extends JPanel {
 
 			@Override
 			public void run() {
-				// TODO Example Hard-coded 3 disk solver
 				try {
 					MazeBoard.this.generator.start();
 					MazeBoard.this.repaint();
@@ -92,7 +91,6 @@ public class MazeBoard extends JPanel {
 	}
 	
 	public void setup() {
-		//this.generator = new RecursiveBackTracker(this.numRows, this.numCols);
 		this.generator = new EllerAlgorithm(this.numRows, this.numCols);
 		switch (this.selectedAlgorithm) {
 			case (RecursiveBackTracker.NAME):
