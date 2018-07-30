@@ -45,6 +45,7 @@ public class MazeControls extends JPanel {
 	private static final int MAX_SPEED = 31;
 	private static final long ONE_SECOND = 1000;
 	private static final Dimension SPINNER_DIMENSION = new Dimension(50, 24);
+	
 	private MazeBoard mazeBoard;
 	private JSlider speedSlider;
 	private JSpinner numColsSpinner,
@@ -91,7 +92,7 @@ public class MazeControls extends JPanel {
 
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
-				// TODO This will not update the state until reset button. Desired behavior? 
+				// This will not update the state until reset button.
 				int numRows = (int) MazeControls.this.numRowsSpinner.getValue();
 				MazeControls.this.mazeBoard.setNumRows(numRows);
 			}
@@ -112,7 +113,7 @@ public class MazeControls extends JPanel {
 
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
-				// TODO This will not update the state until reset button. Desired behavior? 
+				// This will not update the state until reset button.
 				int numCols = (int) MazeControls.this.numColsSpinner.getValue();
 				MazeControls.this.mazeBoard.setNumCols(numCols);
 			}
@@ -136,7 +137,7 @@ public class MazeControls extends JPanel {
 
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
-				// TODO This will immediately update the speed. Desired behavior?
+				// This will immediately update the speed.
 				int speed = MazeControls.this.speedSlider.getValue();
 				MazeControls.this.mazeBoard.setStepDelay(MazeControls.ONE_SECOND / speed);
 			}
