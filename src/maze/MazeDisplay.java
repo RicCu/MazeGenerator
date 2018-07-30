@@ -18,9 +18,11 @@ public class MazeDisplay extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final String TITLE = "Maze Generator";
 	public MazeDisplay() {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setTitle(TITLE);
 		Box box = Box.createHorizontalBox();
 		Generator generator = new RecursiveBackTracker(10, 5);
 		MazeBoard board = new MazeBoard(generator);
