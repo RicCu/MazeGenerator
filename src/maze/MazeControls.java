@@ -44,6 +44,7 @@ public class MazeControls extends JPanel {
 	private static final int MIN_SPEED = 1;
 	private static final int MAX_SPEED = 31;
 	private static final long ONE_SECOND = 1000;
+	private static final Dimension SPINNER_DIMENSION = new Dimension(50, 24);
 	private MazeBoard mazeBoard;
 	private JSlider speedSlider;
 	private JSpinner numColsSpinner,
@@ -84,6 +85,8 @@ public class MazeControls extends JPanel {
 		box.add(numRowsTitle);
 		SpinnerNumberModel rowsSpinnerModel = new SpinnerNumberModel(INIT_NUM_ROWS, MIN_NUM_ROWS, MAX_NUM_ROWS, STEP);
 		this.numRowsSpinner = new JSpinner(rowsSpinnerModel);
+		this.numRowsSpinner.setPreferredSize(SPINNER_DIMENSION);
+		this.numRowsSpinner.setMaximumSize(SPINNER_DIMENSION);
 		this.numRowsSpinner.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -103,6 +106,8 @@ public class MazeControls extends JPanel {
 		box.add(colsSpinnerTitle);
 		SpinnerNumberModel colsSpinnerModel = new SpinnerNumberModel(INIT_NUM_COLS, MIN_NUM_COLS, MAX_NUM_COLS, STEP);
 		this.numColsSpinner = new JSpinner(colsSpinnerModel);
+		this.numColsSpinner.setPreferredSize(SPINNER_DIMENSION);
+		this.numColsSpinner.setMaximumSize(SPINNER_DIMENSION);
 		this.numColsSpinner.addChangeListener(new ChangeListener() {
 
 			@Override
