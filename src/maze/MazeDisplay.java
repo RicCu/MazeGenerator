@@ -1,5 +1,5 @@
 package maze;
-// A01203967 José Ricardo Cuenca Enríquez
+// A01203967 Josï¿½ Ricardo Cuenca Enrï¿½quez
 // MazeDisplay
 // 02/05/18
 
@@ -14,6 +14,11 @@ import maze.generate.RecursiveBackTracker;
 
 public class MazeDisplay extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MazeDisplay() {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

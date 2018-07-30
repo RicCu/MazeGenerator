@@ -1,4 +1,4 @@
-// A01203967 José Ricardo Cuenca Enríquez
+// A01203967 Josï¿½ Ricardo Cuenca Enrï¿½quez
 // MazeControls
 // 02/05/18
 
@@ -27,6 +27,11 @@ import maze.generate.RecursiveBackTracker;
 
 public class MazeControls extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String[] AVAILABLE_ALGORITHMS = {RecursiveBackTracker.NAME, EllerAlgorithm.NAME, BinaryTreeAlgorithm.NAME};
 	
 	private static final int MIN_NUM_ROWS = 3;

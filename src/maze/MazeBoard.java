@@ -1,4 +1,4 @@
-// A01203967 José Ricardo Cuenca Enríquez
+// A01203967 Josï¿½ Ricardo Cuenca Enrï¿½quez
 // MazeBoard
 // 02/05/18
 
@@ -18,6 +18,11 @@ import maze.generate.UninitializedGeneratorException;
 
 public class MazeBoard extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Maze maze;
 	
 	private Generator generator;

@@ -1,4 +1,4 @@
-// A01203967 José Ricardo Cuenca Enríquez
+// A01203967 Josï¿½ Ricardo Cuenca Enrï¿½quez
 // MazeCell
 // 02/05/18
 
@@ -10,6 +10,11 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class MazeCell extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Coordinate coord;
 	
