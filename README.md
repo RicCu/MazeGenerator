@@ -8,3 +8,9 @@ and/or time complexities.
 
 ### Recursive backtracker
 ![Recursive Backtracker](../master/.rsc/recursive_backtracker.gif)
+
+### Eller's algorithm
+![Eller's algorithm](../master/.rsc/eller.gif)
+
+### Binary tree
+![Binary tree](../master/.rsc/binary_tree.gif)
