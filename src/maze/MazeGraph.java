@@ -13,6 +13,7 @@ public class MazeGraph extends Maze {
 	private LinkedList<MazeCell>[] adjacencyList;
 	
 	
+	@SuppressWarnings("unchecked")
 	public MazeGraph(int numRows, int numCols, boolean initWithWalls) {
 		super(numRows, numCols);
 		int numVertices = numRows * numCols;
@@ -90,6 +91,7 @@ public class MazeGraph extends Maze {
 	}
 	
 	public LinkedList<MazeCell> getAdjacentNodes(int vertexId){
+		@SuppressWarnings("unchecked")
 		LinkedList<MazeCell> neighbors = (LinkedList<MazeCell>) this.adjacencyList[vertexId].clone();
 		neighbors.removeFirst();
 		return neighbors;

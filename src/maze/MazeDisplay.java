@@ -31,8 +31,4 @@ public class MazeDisplay extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-
-	public static void main(String[] args) {
-		MazeDisplay display = new MazeDisplay();
-	}
 }

@@ -62,7 +62,7 @@ public class MazeControls extends JPanel {
 		JLabel algorithmsTitle = new JLabel("Generator algorithm");
 		algorithmsTitle.setAlignmentX(CENTER_ALIGNMENT);
 		box.add(algorithmsTitle);
-		JComboBox algorithmSelector = new JComboBox(AVAILABLE_ALGORITHMS);
+		JComboBox<String> algorithmSelector = new JComboBox<String>(AVAILABLE_ALGORITHMS);
 		algorithmSelector.setSelectedItem(RecursiveBackTracker.NAME);
 		algorithmSelector.addActionListener(new ActionListener() {
 
